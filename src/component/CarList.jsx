@@ -12,6 +12,8 @@ import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 
+import {getCars} from './../utils/apiservice'
+
 const styles = theme => ({
     root: {
       width: '100%',
@@ -22,24 +24,26 @@ const styles = theme => ({
       display: 'inline',
     },
   });
-async function getCars(pageno){
-   const resp = await axios.get(Configuration.API_URL, {params:{page:pageno}})
-   if(resp.status === 200){
-       return resp.data;
-   } else {
-       // error handling
-   }
-}
+// async function getCars(pageno){
+//    const resp = await axios.get(Configuration.API_URL, {params:{page:pageno}})
+//    if(resp.status === 200){
+//        return resp.data;
+//    } else {
+//        // error handling
+//    }
+// }
 
-export default function CarDetail({classes}){
+export default function CarDetail({params}){
+  console.log(params);
     const [cars, setcars] = useState([]);
     const [count, setcount] = useState({carsCount:0, pageCount:0});
     const [page, setPage] = useState(1);
     useEffect(() =>  (async () => {
-        const val = await getCars(page);
+        const val = await getCars({...params,page});
+        console.log(val);
         setcars(val.cars);
         setcount({carsCount: val.totalCarsCount, pageCount:val.totalPageCount})
-      })(), [page]);
+      })(), [page, params]);
 
       const handleChange = (event, value) => {
         setPage(value);

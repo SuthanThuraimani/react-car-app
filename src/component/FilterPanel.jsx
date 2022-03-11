@@ -9,7 +9,7 @@ import Select from "@mui/material/Select";
 import {ColorButton} from '../utils/uicontrols'
 import { getCarColors, getCarManufacturers } from "../utils/apiservice";
 
-export default function FilterPanel() {
+export default function FilterPanel({filtercb}) {
     const [colorList, setColorList] = useState([]);
     const [mfrList, setManufacturerList] = useState([]);
     const [color, setColor] = useState("");
@@ -18,7 +18,6 @@ export default function FilterPanel() {
         (async () => {
             const colorResp = await getCarColors();
             const mfrResp = await getCarManufacturers();
-            console.log(mfrResp);
             setColorList(colorResp.colors);
             setManufacturerList(mfrResp.manufacturers);
         })();
@@ -62,7 +61,7 @@ export default function FilterPanel() {
             {mfrList.map((item, index) => <MenuItem key={index} value={item.name}>{item.name}</MenuItem>)}
           </Select>
         </FormControl>
-        <ColorButton variant="contained">Filter</ColorButton>
+        <ColorButton variant="contained"  onClick={() => filtercb(color, mfr)}>Filter</ColorButton>
       </Box>
     </Container>
   </React.Fragment>
