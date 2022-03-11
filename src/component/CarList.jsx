@@ -10,7 +10,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
-
+import Pagination from '@mui/material/Pagination';
 
 const styles = theme => ({
     root: {
@@ -22,8 +22,8 @@ const styles = theme => ({
       display: 'inline',
     },
   });
-async function getCars(){
-   const resp = await axios.get(Configuration.API_URL)
+async function getCars(pageno){
+   const resp = await axios.get(Configuration.API_URL, {params:{page:pageno}})
    if(resp.status === 200){
        return resp.data;
    } else {
@@ -34,14 +34,18 @@ async function getCars(){
 export default function CarDetail({classes}){
     const [cars, setcars] = useState([]);
     const [count, setcount] = useState({carsCount:0, pageCount:0});
-
+    const [page, setPage] = useState(1);
     useEffect(() =>  (async () => {
-        const val = await getCars();
+        const val = await getCars(page);
         setcars(val.cars);
         setcount({carsCount: val.totalCarsCount, pageCount:val.totalPageCount})
-      })(), []);
+      })(), [page]);
 
- return  <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>{cars.map(item => 
+      const handleChange = (event, value) => {
+        setPage(value);
+      };
+
+ return  <><List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>{cars.map(item => 
     <><ListItem alignItems="flex-start">
          <ListItemAvatar>
              <Avatar alt="Remy Sharp" src={item.pictureUrl} />
@@ -57,7 +61,11 @@ export default function CarDetail({classes}){
                  </Typography>
                  {" — I'll be in your neighborhood doing errands this…"}
              </>} />
-     </ListItem><Divider variant="inset" component="li" /></>)  
-  }</List>;
+     </ListItem><Divider variant="inset" component="li" />
+     </>)  
+  }</List>
+  <Pagination showFirstButton showLastButton count={10} page={page} onChange={handleChange} />
+  </>;
 }
+
 
