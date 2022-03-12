@@ -5,7 +5,6 @@ import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 
 import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { ColorButton } from '../utils/uicontrols';
