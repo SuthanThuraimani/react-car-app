@@ -8,6 +8,8 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import {ColorButton} from '../utils/uicontrols'
 import { getCarColors, getCarManufacturers } from "../utils/apiservice";
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 
 export default function FilterPanel({filtercb}) {
     const [colorList, setColorList] = useState([]);
@@ -30,8 +32,8 @@ export default function FilterPanel({filtercb}) {
     }
     return <React.Fragment>
     <Container fixed>
-      <Box sx={{ height: "60vh" }}>
-        <div>Color</div>
+      <Box sx={{ height: "30vh", border:1, p:3 }}>
+        <Typography gutterBottom variant="h6" component="div">Color</Typography>
         <FormControl fullWidth>            
           <InputLabel id="select-color">
             All car colors
@@ -46,7 +48,7 @@ export default function FilterPanel({filtercb}) {
             {colorList.map((item, index) => <MenuItem key={index} value={item}>{item}</MenuItem>)}            
           </Select>
         </FormControl>
-        <div>Manufacturer</div>
+        <Typography gutterBottom variant="h6" component="div">Manufacturer</Typography>
         <FormControl fullWidth>            
           <InputLabel id="select-manu">
             All manufacturers
@@ -61,7 +63,7 @@ export default function FilterPanel({filtercb}) {
             {mfrList.map((item, index) => <MenuItem key={index} value={item.name}>{item.name}</MenuItem>)}
           </Select>
         </FormControl>
-        <ColorButton variant="contained"  onClick={() => filtercb(color, mfr)}>Filter</ColorButton>
+        <Grid container sx={{alignItems: "flex-end",justifyContent:"flex-end"}}><ColorButton sx={{m:2}} variant="contained"  onClick={() => filtercb(color, mfr)}>Filter</ColorButton></Grid>
       </Box>
     </Container>
   </React.Fragment>

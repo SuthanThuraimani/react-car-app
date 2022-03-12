@@ -2,8 +2,10 @@ import axios from "axios";
 import Configuration from "./configuration";
 
 async function getCars(params){
-    console.log(params);
     return await AxiosGetCall(Configuration.API_URL, {params})
+}
+async function getCarDetails(stockno){
+    return await AxiosGetCall(`${Configuration.API_URL}/${stockno}`)
 }
 async function getCarColors(){
    return await AxiosGetCall(Configuration.COLOR_API_URL)
@@ -27,4 +29,4 @@ const AxiosGetCall = async (url, params) => {
    }
 };
 
-export {getCars, getCarColors, getCarManufacturers}
+export {getCars, getCarColors, getCarManufacturers, getCarDetails}

@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
   border: 1px seagreen solid;
   height: 100vh;
   display: flex;
@@ -22,14 +22,15 @@
   width:70%;
 }
 .header {
-  height: 150px;
+  height: 80px;
 }
 .content {
   border-top: 5px grey solid ;
   border-bottom: 5px grey solid;
+  padding:15px;
 }
 .footer {
-  height: 50px;
+  height: 80px;
 }
 
 .r {
