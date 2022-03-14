@@ -7,7 +7,7 @@ export default function NotFound(){
     const navigatetoHome = () => navigate('/');
     return  <Stack sx={{ gridArea:  "2 / 1 / span 1 / span 4" , mt: 5, textAlign: "center"}}>
     <Typography gutterBottom variant="h5" component="div">
-        <img src={Configuration.LOGO} width="250" height="50" alt="Auto1 group" />
+        <img src={Configuration.LOGO} width="250" height="50" alt="car logo" />
     </Typography>
         
     <Typography gutterBottom variant="h5" component="div">
